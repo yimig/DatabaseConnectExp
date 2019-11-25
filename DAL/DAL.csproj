@@ -34,7 +34,6 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,12 +44,13 @@
   <ItemGroup>
     <Compile Include="DBHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TableManager.cs" />
+    <Compile Include="RoomService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{2c808035-2b54-4f6f-83ff-c4c89880b95e}</Project>
-      <Name>Model</Name>
+    <ProjectReference Include="..\..\HotelMgr2017101999\Models\Models.csproj">
+      <Project>{d68d432e-0cf5-45ef-bd12-a41404ea0b47}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
-using Model;
+using Models;
 
 namespace BLL
 {
-    /// <summary>
-    /// 封装操作用户信息的方法
-    /// </summary>
     public static class UserManager
     {
+
+        public static List<User> GetUsers(string userName,string userPwd)
+        {
+            return UserService.searchUser(" and userName=\'"+userName+"\' and userPwd=\'"+userPwd+"\'");
+        }
+
         /// <summary>
         /// 向数据库添加一条用户信息
         /// </summary>
@@ -20,7 +23,7 @@ namespace BLL
         /// <returns>添加是否成功</returns>
         public static bool AddUser(User user)
         {
-            if (CheckUserInfo(user)) return ConvertCmdResult(TableManager.AddUser(user));
+            if (CheckUserInfo(user)) return ConvertCmdResult(UserService.AddUser(user));
             else return false;
         }
 
@@ -31,18 +34,18 @@ namespace BLL
         /// <returns>更新是否成功</returns>
         public static bool UpdateUser(User user)
         {
-            if (CheckUserInfo(user)) return ConvertCmdResult(TableManager.UpdateUser(user));
+            if (CheckUserInfo(user)) return ConvertCmdResult(UserService.UpdateUser(user));
             else return false;
         }
 
         /// <summary>
         /// 在数据库中删除一条用户信息
         /// </summary>
-        /// <param name="id">用户id</param>
+        /// <param name="name">用户id</param>
         /// <returns>删除是否成功</returns>
-        public static bool DelUser(int id)
+        public static bool DelUser(string name)
         {
-            return ConvertCmdResult(TableManager.DelUser(id));
+            return ConvertCmdResult(UserService.DelUser(name));
         }
 
         /// <summary>
@@ -53,10 +56,9 @@ namespace BLL
         private static bool CheckUserInfo(User user)
         {
             bool check = true;
-            if (user.Name.Length > 50) check = false;
-            else if (user.Address.Length > 100) check = false;
-            else if (user.Temp.Length > 200) check = false;
-            else if (!(user.Gender == '1' || user.Gender == '0')) check = false;
+            if (user.UserName.Length > 20) check = false;
+            else if (!(user.Role==0||user.Role==1)) check = false;
+            else if (user.Note.Length > 500) check = false;
             return check;
         }
 

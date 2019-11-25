@@ -41,17 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserManager.cs" />
+    <Compile Include="RoomManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{914726e0-4844-4aba-90f1-ecec36a519ed}</Project>
-      <Name>DAL</Name>
+    <ProjectReference Include="..\..\HotelMgr2017101999\Models\Models.csproj">
+      <Project>{d68d432e-0cf5-45ef-bd12-a41404ea0b47}</Project>
+      <Name>Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{2c808035-2b54-4f6f-83ff-c4c89880b95e}</Project>
-      <Name>Model</Name>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{62b6a970-8710-47f9-a33c-c24fea798268}</Project>
+      <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

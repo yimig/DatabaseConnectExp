@@ -4,70 +4,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Models
 {
-    /// <summary>
-    /// 封装用户信息
-    /// </summary>
     public class User
     {
-        private string name, address, temp;
-        private int id;
-        private char gender;
-        private DateTime birthday;
+        private string userName, userPwd, note;
+        private int role;
 
-        /// <summary>
-        /// 用户名
-        /// </summary>
-        public string Name
+        public string UserName
         {
-            get => name;
-            set => name = value;
+            get => userName;
+            set => userName = value;
         }
 
-        /// <summary>
-        /// 用户住址
-        /// </summary>
-        public string Address
+        public string UserPwd
         {
-            get => address;
-            set => address = value;
+            get => userPwd;
+            set => userPwd = value;
         }
 
-        /// <summary>
-        /// 附加信息
-        /// </summary>
-        public string Temp
+        public string Note
         {
-            get => temp;
-            set => temp = value;
+            get => note;
+            set => note = value;
         }
 
-        /// <summary>
-        /// 用户id
-        /// </summary>
-        public int Id
+        public int Role
         {
-            get => id;
-            set => id = value;
-        }
-
-        /// <summary>
-        /// 用户性别（男=0，女=1）
-        /// </summary>
-        public char Gender
-        {
-            get => gender;
-            set => gender = value;
-        }
-
-        /// <summary>
-        /// 用户生日
-        /// </summary>
-        public DateTime Birthday
-        {
-            get => birthday;
-            set => birthday = value;
+            get => role;
+            set => role = value;
         }
     }
 }

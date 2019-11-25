@@ -3,43 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
 using System.Data.SqlClient;
+using System.Configuration;
 using System.Data;
 
 namespace DAL
 {
-    /// <summary>
-    /// 封装与数据库直接联系方法
-    /// </summary>
     public class DBHelper
     {
-        private static SqlConnection conn;
-    
-        /// <summary>
-        /// 取得一条可用链接
-        /// </summary>
+        private static SqlConnection conn = null;
+
         public static SqlConnection Connection
         {
             get
             {
-                if(conn==null)
+                if (conn == null)
                 {
-                    string connStr = ConfigurationManager.ConnectionStrings["HotelConStr"].ConnectionString;
-                    conn = new SqlConnection(connStr);
+                    conn = new SqlConnection();
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["HotelSqlConn"].ConnectionString;
                     conn.Open();
                 }
-                else if(conn.State== ConnectionState.Closed)
+                else if(conn.State==ConnectionState.Closed)
                 {
                     conn.Open();
                 }
-                else if(conn.State==ConnectionState.Broken)
+                else if (conn.State == ConnectionState.Broken)
                 {
                     conn.Close();
                     conn.Open();
                 }
+
                 return conn;
             }
+        }
+
+        public static SqlDataReader ExecuteQuery(string sql)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = Connection;
+            cmd.CommandText = sql;
+            return cmd.ExecuteReader();
         }
 
         /// <summary>
@@ -53,17 +56,14 @@ namespace DAL
             return cmd.ExecuteNonQuery();
         }
 
-        /// <summary>
-        /// 执行带有参数的sql指令
-        /// </summary>
-        /// <param name="sql">SQL指令</param>
-        /// <param name="values">参数</param>
-        /// <returns></returns>
-        public static int ExecuteCommand(string sql,params SqlParameter[] values)
+
+        public static void CloseConnection()
         {
-            SqlCommand cmd = new SqlCommand(sql, Connection);
-            cmd.Parameters.AddRange(values);
-            return cmd.ExecuteNonQuery();
+            if (conn != null)
+            {
+                conn.Close();
+                conn = null;
+            }
         }
     }
 }
